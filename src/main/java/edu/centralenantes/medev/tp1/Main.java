@@ -24,5 +24,19 @@ public class Main {
       Joueur j = new Joueur(nom,fortune,position,p);
       p.joueurs.add(j);
     }
+    
+    //Affichage
+    p.affiche();
+    
+    //Tour de Jeu
+    boolean jeuFini = false;
+    while(!jeuFini){
+      p.tourDeJeu();
+      p.affiche();
+      jeuFini = p.finDePartie();
+    }
+    
+    //Jeu fini
+    System.out.println("Le jeu est fini.");
   }
 }
