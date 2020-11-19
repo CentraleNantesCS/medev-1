@@ -1,11 +1,13 @@
+package edu.centralenantes.medev.tp1;
+
 /**
  *
- * @author 
+ * @author
  */
 public class NoMoreMoney extends Exception{
-    
+
     public NoMoreMoney(String errorMessage){
         super(errorMessage);
     }
-    
+
 }
