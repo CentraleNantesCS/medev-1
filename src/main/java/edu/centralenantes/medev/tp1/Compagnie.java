@@ -12,20 +12,19 @@ public class Compagnie extends Achetable {
 
   @Override
   public int getPrixLoyer() {
-
     if (this.proprietaire == null) {
       return 0;
     }
     // TODO
-    return this.proprietaire.plateau.getNbCompagnies(this.proprietaire) * 4000;
+    return this.proprietaire.getPlateau().getNbCompany(this.proprietaire) * 4000;
   }
 
   @Override
   public String toString() {
     if (this.proprietaire == null) {
-      return this.toString();
+      return super.toString();
     }
-    return this + ", loyer = " + this.getPrixLoyer() + "€";
+    return super.toString() + ", loyer = " + this.getPrixLoyer() + "€";
   }
 
 }

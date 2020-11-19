@@ -1,6 +1,5 @@
 package edu.centralenantes.medev.tp1;
 
-
 /**
  *
  * @author
@@ -34,17 +33,17 @@ public class Joueur {
     }
   }
 
-  public void paiement(Joueur j, int montant) {
+  public void paiement(Joueur j, int montant) throws NoMoreMoney {
     if (j == null) { // On paie la banque
       if (this.fortune < montant) {
-        // noMoremOney("Paiement ..");
+        throw new NoMoreMoney("No more money. You're broke.");
       } else {
         this.fortune -= montant;
       }
     } else { // On paie un joueur
       if (this.fortune < montant) {
         // Exception NoMoreMoney ?
-        throw new NoMoreMoney("No more money. You're broke.")
+        throw new NoMoreMoney("No more money. You're broke.");
       } else {
         j.setFortune(j.getFortune() + montant);
         this.fortune -= montant;
@@ -59,21 +58,35 @@ public class Joueur {
   public void monTourDeJeu() { // Classe Joueur
     int valeur = lanceLeDe();
     this.avance(valeur);
-    Case caseCourante = this.plateau.getPlateau().get(this.position);
+    Case caseCourante = this.plateau.getListeCases().get(this.position);
     System.out.println("Le joueur " + this.nom + " se trouve sur la case " + caseCourante.getNom());
 
     if (caseCourante instanceof Achetable) { // Case achetable
-      if (caseCourante.getProprietaire() == null) { // Cas où la case n'appartient pas encore à un joueur
-        if (caseCourante.getPrix() < this.fortune && valeur % 2 == 1) { // Le joueur l'achète si la valeur du dé est
-                                                                        // impaire et...
-          caseCourante.setProprietaire(this);
-          this.fortune -= caseCourante.getPrix();
+      if (((Achetable) caseCourante).getProprietaire() == null) { // Cas où la case n'appartient pas encore à un joueur
+        if (((Achetable) caseCourante).getPrix() < this.fortune && valeur % 2 == 1) { // Le joueur l'achète si la valeur
+          ((Achetable) caseCourante).acheter(this);
         }
-      } else { // Cas où la case appartient à un joueur
-        if (caseCourante.getProprietaire() == this && caseCourante instanceof Constructible) { // Notre case
-          caseCourante.construire();
-        } else { // La case d'un autre joueur
-          paiement(caseCourante.getProprietaire());
+      } else {
+        // Cas où la case appartient à un joueur
+        if (((Achetable) caseCourante).getProprietaire() == this && caseCourante instanceof Constructible) {
+          // Notre case
+          ((Constructible) caseCourante).construire();
+        } else {
+          // La case d'un autre joueur
+          try {
+            this.paiement(((Achetable) caseCourante).getProprietaire(), ((Achetable) caseCourante).getPrixLoyer());
+          } catch (Exception e) {
+            // No money :')
+            System.out.println(this.nom + ":" + e.getMessage());
+            try {
+              this.paiement(((Achetable) caseCourante).getProprietaire(),
+                  Math.min(((Achetable) caseCourante).getPrixLoyer(), this.fortune));
+            } catch (NoMoreMoney e1) {
+              // TODO Auto-generated catch block
+              e1.printStackTrace();
+            }
+
+          }
         }
       }
     }
@@ -109,6 +122,11 @@ public class Joueur {
 
   public void setPlateau(Plateau plateau) {
     this.plateau = plateau;
+  }
+
+  @Override
+  public String toString() {
+    return this.nom;
   }
 
 }

@@ -37,9 +37,9 @@ public class Constructible extends Achetable {
   @Override
   public String toString() {
     if (this.proprietaire == null) {
-      return this.toString();
+      return super.toString();
     }
-    String ret = this.toString();
+    String ret = super.toString();
     if (nbMaisons > 0) {
       ret += ", " + nbMaisons + "maisons";
     }

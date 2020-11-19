@@ -30,4 +30,8 @@ public abstract class Case {
   public void affiche() {
     System.out.println(this);
   }
+
+public int getPrix() {
+	return 0;
+}
 }

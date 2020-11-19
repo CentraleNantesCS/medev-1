@@ -6,7 +6,12 @@ package edu.centralenantes.medev.tp1;
  */
 public class NoMoreMoney extends Exception{
 
-    public NoMoreMoney(String errorMessage){
+  /**
+   *
+   */
+  private static final long serialVersionUID = 1L;
+
+  public NoMoreMoney(String errorMessage) {
         super(errorMessage);
     }
 
