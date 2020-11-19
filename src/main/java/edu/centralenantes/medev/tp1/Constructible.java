@@ -17,12 +17,21 @@ public class Constructible extends Achetable {
   public int getPrixLoyer() {
 
     int a = 500;
-    int b = 1000;
+    int b = 1600;
 
     if (this.proprietaire == null) {
       return 0;
     }
     return nbMaisons * a + nbHotels * b + 500;
+  }
+
+  public void construire() {
+    if (nbMaisons < 3) {
+      nbMaisons += 1;
+      return;
+    }
+    nbHotels += 1;
+    nbMaisons = 0;
   }
 
   @Override
