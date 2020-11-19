@@ -6,6 +6,7 @@ public class Main {
   public static void main(String[] args) {
     //initialiser le plateau
     Plateau p = new Plateau();
+    p.initPlateau();
     
     //Demander le nombre de joueurs
     System.out.println("Bienvenue sur Monopoly à Centrale Nantes");
