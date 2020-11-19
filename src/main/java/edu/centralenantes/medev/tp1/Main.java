@@ -18,8 +18,7 @@ public class Main {
     for(int i=0; i<nbJoueurs; i++){
       System.out.println("On commence par le joueur "+(i+1)+"\nEntrez votre nom, s'il vous plait.");
       String nom = sc.next();
-      //Quelle fortune au début du jeu ???
-      int fortune = 7500;
+      int fortune = 100000;
       int position = 0;
       //ajouter le joueur a la liste dans plateau
       Joueur j = new Joueur(nom,fortune,position,p);
