@@ -1,11 +1,15 @@
 ## Commit
 
 ```
+git pull
+```
+
+```
 git add .
 ```
 
 ```
-git commit -m "add: class Plateau #1"
+git commit -m "add: class Plateau closes #1"
 ```
 
 ```
