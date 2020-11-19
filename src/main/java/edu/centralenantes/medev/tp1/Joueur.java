@@ -1,7 +1,8 @@
 package edu.centralenantes.medev.tp1;
 
+import java.text.NumberFormat;
+
 /**
- *
  * @author
  */
 public class Joueur {
@@ -59,7 +60,7 @@ public class Joueur {
     int valeur = lanceLeDe();
     this.avance(valeur);
     Case caseCourante = this.plateau.getListeCases().get(this.position);
-    System.out.println("Le joueur " + this.nom + " se trouve sur la case " + caseCourante.getNom());
+    System.out.printf("Le joueur %s se trouve sur la case %s -- Fortune: %s € \n", this.nom, caseCourante.getNom(), NumberFormat.getInstance().format(this.fortune));
 
     if (caseCourante instanceof Achetable) { // Case achetable
       if (((Achetable) caseCourante).getProprietaire() == null) { // Cas où la case n'appartient pas encore à un joueur
@@ -80,7 +81,7 @@ public class Joueur {
             System.out.println(this.nom + ":" + e.getMessage());
             try {
               this.paiement(((Achetable) caseCourante).getProprietaire(),
-                  Math.min(((Achetable) caseCourante).getPrixLoyer(), this.fortune));
+                      Math.min(((Achetable) caseCourante).getPrixLoyer(), this.fortune));
             } catch (NoMoreMoney e1) {
               // TODO Auto-generated catch block
               e1.printStackTrace();

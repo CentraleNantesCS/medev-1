@@ -9,6 +9,8 @@ public class Plateau {
 
   public static int TAILLE = 10;
 
+  public static int TEXT_LENGTH = 30;
+
   private ArrayList<Case> listeCases;
 
   private LinkedList<Joueur> listeJoueurs;
@@ -164,20 +166,19 @@ public class Plateau {
 
   public void affiche() {
     afficheTop();
-    // 19 & 29
     int leftCase = 19;
     int rightCase = 29;
 
+    // affichage des cases entre la ligne 9 et 2
     for (int i = 0; i < 9; i++) {
       System.out.print("|");
-      listeCases.get(leftCase).affiche();
 
+      listeCases.get(leftCase).affiche();
       // 9 case vides du milieu
-      for (int j = 0; j < 9; j++) {
-        System.out.print("|");
-        System.out.print(fixedLengthString("", 20));
-      }
       System.out.print("|");
+      for (int j = 0; j < 9; j++) {
+        System.out.printf("%1$" + TEXT_LENGTH + "s", "");
+      }
       listeCases.get(rightCase).affiche();
       System.out.println("|");
 
@@ -188,7 +189,4 @@ public class Plateau {
     afficheBas();
   }
 
-  public String fixedLengthString(String string, int length) {
-    return String.format("%1$" + length + "s", string);
-  }
 }

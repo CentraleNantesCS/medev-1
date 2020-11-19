@@ -15,7 +15,6 @@ public class Compagnie extends Achetable {
     if (this.proprietaire == null) {
       return 0;
     }
-    // TODO
     return this.proprietaire.getPlateau().getNbCompany(this.proprietaire) * 4000;
   }
 
