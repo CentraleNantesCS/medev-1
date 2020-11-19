@@ -26,4 +26,8 @@ public abstract class Case {
 
     return ret;
   }
+
+  public void affiche() {
+    System.out.println(this);
+  }
 }
